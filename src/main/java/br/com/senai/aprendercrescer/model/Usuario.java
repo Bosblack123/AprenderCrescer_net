@@ -9,11 +9,10 @@ import java.util.Date;
 public class Usuario {
 
     private int idusuario;
-    private int idgrupo;
     private String login;
     private String senha;
     private String nome;
-    private char flaginativo;
+    private char flagnativo;
     private Date dtalteracao;
 
     public int getIdusuario() {
@@ -22,14 +21,6 @@ public class Usuario {
 
     public void setIdusuario(int idusuario) {
         this.idusuario = idusuario;
-    }
-
-    public int getIdgrupo() {
-        return idgrupo;
-    }
-
-    public void setIdgrupo(int idgrupo) {
-        this.idgrupo = idgrupo;
     }
 
     public String getLogin() {
@@ -56,12 +47,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public char getFlaginativo() {
-        return flaginativo;
+    public char getFlagnativo() {
+        return flagnativo;
     }
 
-    public void setFlaginativo(char flaginativo) {
-        this.flaginativo = flaginativo;
+    public void setFlagnativo(char flaginativo) {
+        this.flagnativo = flaginativo;
     }
 
     public Date getDtalteracao() {
