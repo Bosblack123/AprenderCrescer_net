@@ -30,9 +30,9 @@ public class UsuarioDao {
         ResultSet rs;
         Usuario usuario;
         try {
-            rs = st.executeQuery("SELECT  IDUSUARIO, IDGRUPO,LOGIN,"
-                    + " SENHAUSUARIO, NOMEUSUARIO,DTALTERACAO,"
-                    + "FLAGINATIVO FROM WEB WHERE IDUSUARIO = " + id);
+            rs = st.executeQuery("SELECT  IDUSUARIO, IDGRUPO, LOGIN,"
+                    + " SENHA, NOME, DTALTERACAO,"
+                    + "FLAGNATIVO FROM WEB WHERE IDUSUARIO = " + id);
             while (rs.next()) {
                 usuario = new Usuario();
                 usuario.setIdusuario(rs.getInt("IDUSUARIO"));
@@ -61,9 +61,9 @@ public class UsuarioDao {
             }
             usuario.setIdusuario(id);
             sql = "INSERT INTO web( idusuario, login, "
-                    + "senhausuario, nomeusuario, dtalteracao, flaginativo)"
+                    + "senha, nome, dtalteracao, flagnativo)"
                     + "VALUES (" + usuario.getIdusuario()
-                    + ", 0, '" + usuario.getLogin()
+                    + ", '" + usuario.getLogin()
                     + "' , '" + usuario.getSenha()
                     + "' , '" + usuario.getNome()
                     + "' , '" + data.toString()
@@ -80,13 +80,13 @@ public class UsuarioDao {
 
     public boolean updateUsuario(Usuario usuario) {
         Date data = new Date();
-        String sql = "UPDATE usuario SET "
+        String sql = "UPDATE web SET "
                 + "idusuario=" + usuario.getIdusuario() + ", "
                 + "login='" + usuario.getLogin() + "',"
-                + "senhausuario='" + usuario.getSenha() + "', "
-                + "nomeusuario='" + usuario.getNome() + "',"
+                + "senha='" + usuario.getSenha() + "', "
+                + "nome='" + usuario.getNome() + "',"
                 + "dtalteracao='" + data + "', "
-                + "flaginativo='F' "
+                + "flagnativo='N' "
                 + "WHERE idusuario= " + usuario.getIdusuario() + ";";
         try {
             st.executeUpdate(sql);
@@ -100,17 +100,17 @@ public class UsuarioDao {
     public ArrayList<Usuario> getUsuarios() {
         ResultSet rs;
         Usuario usuario;
-        ArrayList<Usuario> lista = new ArrayList<Usuario>();
+        ArrayList<Usuario> lista = new ArrayList<>();
         try {
             rs = st.executeQuery("SELECT  IDUSUARIO, LOGIN,"
-                    + " SENHAUSUARIO, NOMEUSUARIO,DTALTERACAO,"
-                    + "FLAGINATIVO FROM USUARIO ");
+                    + " SENHA, NOME,DTALTERACAO,"
+                    + "FLAGNATIVO FROM WEB");
             while (rs.next()) {
                 usuario = new Usuario();
                 usuario.setIdusuario(rs.getInt("IDUSUARIO"));
                 usuario.setLogin(rs.getString("LOGIN"));
-                usuario.setNome(rs.getString("NOMEUSUARIO"));
-                usuario.setSenha(rs.getString("SENHAUSUARIO"));
+                usuario.setNome(rs.getString("NOME"));
+                usuario.setSenha(rs.getString("SENHA"));
                 lista.add(usuario);
             }
         } catch (SQLException ex) {
@@ -120,7 +120,7 @@ public class UsuarioDao {
     }
 
     public boolean deleteUsuario(int id) {
-        String sql = "DELETE FROM USUARIO WHERE IDUSUARIO = " + id;
+        String sql = "DELETE FROM WEB WHERE IDUSUARIO = " + id;
         try {
             st.execute(sql);
             return true;

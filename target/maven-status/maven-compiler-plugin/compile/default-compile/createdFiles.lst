@@ -1,6 +1,10 @@
-br\com\senai\aprendercrescer\Dao\UsuarioDao.class
+br\com\senai\aprendercrescer\Controller\GrupoController.class
 br\com\senai\aprendercrescer\model\Usuario.class
-br\com\senai\aprendercrescer\Dao\Conexao.class
-br\com\senai\aprendercrescer\ws\MessageRestService.class
+br\com\senai\aprendercrescer\Dao\GrupoDao.class
 br\com\senai\aprendercrescer\Controller\UsuarioController.class
+br\com\senai\aprendercrescer\Dao\UsuarioDao.class
+br\com\senai\aprendercrescer\model\Grupo.class
+br\com\senai\aprendercrescer\Dao\Conexao.class
+br\com\senai\aprendercrescer\ws\GrupoWs.class
+br\com\senai\aprendercrescer\ws\MessageRestService.class
 br\com\senai\aprendercrescer\ws\UsuarioWs.class
