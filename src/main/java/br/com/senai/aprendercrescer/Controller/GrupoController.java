@@ -16,7 +16,7 @@ public class GrupoController {
         }
     }
 
-    public boolean insereUsuario(Grupo grupo) {
+    public boolean insereGrupo(Grupo grupo) {
 
         if (grupo.getIdgrupo() != 0) {
             return grupoDao.updateGrupo(grupo);

@@ -16,7 +16,7 @@ public class Conexao {
         if (conexao == null) {
            try{
             conexao = DriverManager.getConnection(
-                    "jdbc:postgresql://127.0.0.1:5432/acweb", 
+                    "jdbc:postgresql://127.0.0.1:5432/web", 
                     "postgres", 
                     "postgres");
            }catch(SQLException ex){

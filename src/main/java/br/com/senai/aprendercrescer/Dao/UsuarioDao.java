@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import br.com.senai.aprendercrescer.model.Usuario;
 
@@ -104,7 +102,7 @@ public class UsuarioDao {
         try {
             rs = st.executeQuery("SELECT  IDUSUARIO, LOGIN,"
                     + " SENHA, NOME,DTALTERACAO,"
-                    + "FLAGNATIVO FROM WEB");
+                    + "FLAGNATIVO FROM WEB ORDER BY IDUSUARIO");
             while (rs.next()) {
                 usuario = new Usuario();
                 usuario.setIdusuario(rs.getInt("IDUSUARIO"));

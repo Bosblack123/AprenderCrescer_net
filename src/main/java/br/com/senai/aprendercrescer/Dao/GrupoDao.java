@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import br.com.senai.aprendercrescer.model.Grupo;
 
 /**
@@ -47,23 +46,23 @@ public class GrupoDao {
         int id = 0;
         try {
 
-            sql = "SELECT COALESCE(MAX(IDUSUARIO)+1, 1) AS IDGRUPO FROM GRUPO";
+            sql = "SELECT COALESCE(MAX(IDGRUPO)+1, 1) AS IDGRUPO FROM GRUPO";
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 id = rs.getInt("IDGRUPO");
             }
             grupo.setIdgrupo(id);
             sql = "INSERT INTO grupo( idgrupo, tipousuario, "
-                    + "descricaogrupo,)"
-                    + "VALUES (" + grupo.getIdgrupo()
-                    + ", 0, '" + grupo.getTipousuario()
-                    + "' , '" + grupo.getDescricaogrupo();
+                    + "descricaogrupo)"
+                    + " VALUES (" + grupo.getIdgrupo()
+                    + ", '" + grupo.getTipousuario()
+                    + "', '" + grupo.getDescricaogrupo()
+                    + "')";
             System.out.println(sql);
             st.execute(sql);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Problema ao inserir usuario: " + ex);
-            JOptionPane.showMessageDialog(null, "Erro:" + ex);
+            System.out.println("Problema ao inserir grupo: " + ex);
         }
         return false;
     }
