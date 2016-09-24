@@ -8,7 +8,7 @@ public class Conta {
     private int idconta;
     private String descricao;
     private String tipoconta;
-    private int valor;
+    private double valor;
 
     public int getIdconta() {
         return idconta;
@@ -33,12 +33,11 @@ public class Conta {
     public void setTipoconta(String tipoconta) {
         this.tipoconta = tipoconta;
     }
-
-    public int getValor() {
+        public double getValor() {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 }

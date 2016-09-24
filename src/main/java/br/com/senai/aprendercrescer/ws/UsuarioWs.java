@@ -32,8 +32,8 @@ public class UsuarioWs {
     public Response getUsuario() {
         try {
             JSONObject retorno = new JSONObject();
-            retorno.put("nome", "Luciano");
-            retorno.put("idade", 29);
+            retorno.put("nome", "Daniel");
+            retorno.put("idade", 19);
             return Response.status(200).entity(retorno.toString()).build();
         } catch (JSONException ex) {
             Logger.getLogger(UsuarioWs.class.getName()).log(Level.SEVERE, null, ex);

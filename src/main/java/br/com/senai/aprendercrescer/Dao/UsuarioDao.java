@@ -28,7 +28,7 @@ public class UsuarioDao {
         ResultSet rs;
         Usuario usuario;
         try {
-            rs = st.executeQuery("SELECT  IDUSUARIO, IDGRUPO, LOGIN,"
+            rs = st.executeQuery("SELECT  IDUSUARIO, LOGIN,"
                     + " SENHA, NOME, DTALTERACAO,"
                     + "FLAGNATIVO FROM WEB WHERE IDUSUARIO = " + id);
             while (rs.next()) {
