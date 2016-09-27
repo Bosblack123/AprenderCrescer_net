@@ -42,31 +42,44 @@ public class UsuarioWs {
         return Response.status(500).build();
     }
 
-    @GET
+        @GET
     @Path("/getusuarios")
     @Produces("application/json")
-    public Response getUsuarios() {
-        UsuarioController usuarioController;
-        usuarioController = new UsuarioController();
+    public Response getAllUsuarios() {
+        // ArrayList<JSONObject> listaJson = new ArrayList<JSONObject>();
 
-        ArrayList<Usuario> lista
-                = usuarioController.getUsuarios();
-        JSONObject retorno = new JSONObject();
-        JSONObject jUsuario;
-        for (Usuario usuario : lista) {
-            try {
+        try {
+            UsuarioController ususarioControler;
+            ususarioControler = new UsuarioController();
+            ArrayList<Usuario> lista = ususarioControler.getUsuarios();
+
+            JSONObject jUsuario;
+            StringBuilder retorno = new StringBuilder();
+            retorno.append("[");
+            boolean controle = false;
+            for (Usuario usuario : lista) {
+                if (controle) {
+                    retorno.append(" , ");
+                }
+
                 jUsuario = new JSONObject();
                 jUsuario.put("idUsuario", usuario.getIdusuario());
+                jUsuario.put("login", usuario.getLogin());
+                jUsuario.put("senha", usuario.getSenha());
                 jUsuario.put("nome", usuario.getNome());
-                jUsuario.put("Senha", usuario.getSenha());
-                jUsuario.put("Flagnativo", usuario.getFlagnativo());
-                retorno.put("usuario" + usuario.getIdusuario(), jUsuario.toString());
-            } catch (JSONException ex) {
-                Logger.getLogger(UsuarioWs.class.getName()).log(Level.SEVERE, null, ex);
+                jUsuario.put("flagnativo", usuario.getFlagnativo() + "");
+                retorno.append(jUsuario.toString());
+                controle = true;
             }
 
+            retorno.append("]");
+            return Response.status(200).entity(retorno.toString()).build();
+        } catch (Exception ex) {
+            System.out.println("Erro:" + ex);
+            return Response.status(200).entity(
+                    "{erro : \"" + ex + "\"}").build();
+
         }
-        return Response.status(200).entity(retorno.toString()).build();
     }
 
     
