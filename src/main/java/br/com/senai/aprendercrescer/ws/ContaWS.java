@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
@@ -23,31 +22,44 @@ import org.json.JSONObject;
  */
 @Path("/conta")
 public class ContaWS {
-    @GET
-    @Path("/getcontas")
-    @Produces("application/json")
-    public Response getConta() {
-        ContaController contaController;
-        contaController = new ContaController();
 
-        ArrayList<Conta> lista
-                = contaController.getContas();
-        JSONObject retorno = new JSONObject();
-        JSONObject jConta;
-        for (Conta conta : lista) {
-            try {
+    @GET
+    @Path("/getContas")
+    @Produces("application/json")
+    public Response getAllUsuarios() {
+        // ArrayList<JSONObject> listaJson = new ArrayList<JSONObject>();
+
+        try {
+            ContaController contaControler;
+            contaControler = new ContaController();
+            ArrayList<Conta> lista = contaControler.getContas();
+
+            JSONObject jConta;
+            StringBuilder retorno = new StringBuilder();
+            retorno.append("[");
+            boolean controle = false;
+            for (Conta conta : lista) {
+                if (controle) {
+                    retorno.append(" , ");
+                }
+
                 jConta = new JSONObject();
                 jConta.put("idconta", conta.getIdconta());
                 jConta.put("descricao", conta.getDescricao());
                 jConta.put("tipoconta", conta.getTipoconta());
                 jConta.put("valor", conta.getValor());
-                retorno.put("conta" + conta.getIdconta(), jConta.toString());
-            } catch (JSONException ex) {
-                Logger.getLogger(UsuarioWs.class.getName()).log(Level.SEVERE, null, ex);
+                retorno.append(jConta.toString());
+                controle = true;
             }
 
+            retorno.append("]");
+            return Response.status(200).entity(retorno.toString()).build();
+        } catch (Exception ex) {
+            System.out.println("Erro:" + ex);
+            return Response.status(200).entity(
+                    "{erro : \"" + ex + "\"}").build();
+
         }
-        return Response.status(200).entity(retorno.toString()).build();
     }
     
     @POST

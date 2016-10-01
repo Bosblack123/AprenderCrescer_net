@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+    <head>
+        <title>Lista Conta</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="vendor/js/angular.min.js"></script>
+        <script type="text/javaScript" src="js/myApp.js"></script>
+        <script type="text/javaScript" src="js/controller/ContaController.js"></script>
+        <script type="text/javaScript" src="js/factory/ContaFactory.js"></script>
+    </head>
+    <body ng-controller="ContaController" ng-init="buscaConta()">
+        <div>
+            <h1>Lista Conta</h1>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IdConta</th>
+                        <th>Descricao</th>
+                        <th>TipoConta</th>
+                        <th>Valor</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in dados">
+                        <td>{{item.idconta}}</td>
+                        <td>{{item.descricao}}</td>
+                        <td>{{item.tipoconta}}</td>
+                        <td>{{item.valor}}</td>
+                        <td>
+                            <button>Editar</button>
+                            <button>Remover</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

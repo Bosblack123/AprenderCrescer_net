@@ -11,6 +11,33 @@
         <script type="text/javaScript" src="js/factory/UsuarioFactory.js"></script>
     </head>
     <body ng-controller="UsuarioController" ng-init="buscaUsuario()">
+        <div ng-hide="editando">
+            <h1> Cadastro </h1>
+        </div>
+        <div ng-show="editando">
+            <h1> Editando </h1>
+        </div>
+        <form ng-submit="CadastroUsuario(usuario)">
+            <div>
+                <label>Nome:</label>
+                <input ng-model="usuario.nome" Type="text" placeholder="Digite seu Nome">
+            </div>
+            <div>
+                <label>Login:</label>
+                <input ng-model="usuario.login" Type="text" placeholder="Digite seu Login">
+            </div>
+            <div>
+                <label>Senha:</label>
+                <input ng-model="usuario.senha" Type="password" placeholder="Digite sua Senha">
+            </div>
+            <div>
+                <label>Ativo:</label>
+                <input ng-model="usuario.flagnativo" Type="text" placeholder="Voce e ativo?">
+            </div>
+            <button ng-show="editando" type="submit">Salvar</button>
+            <button ng-hide="editando" type="submit">Adicionar</button>
+        </form>
+        
         <div>
             <h1>Lista Usuario</h1>
         </div>
@@ -30,9 +57,9 @@
                         <td>{{item.idUsuario}}</td>
                         <td>{{item.login}}</td>
                         <td>{{item.nome}}</td>
-                        <td>{{item.flagativo}}</td>
+                        <td>{{item.flagnativo}}</td>
                         <td>
-                            <button>Editar</button>
+                            <button ng-click="editarusuario()">Editar</button>
                             <button>Remover</button>
                         </td>
                     </tr>

@@ -42,7 +42,7 @@ public class UsuarioWs {
         return Response.status(500).build();
     }
 
-        @GET
+    @GET
     @Path("/getusuarios")
     @Produces("application/json")
     public Response getAllUsuarios() {

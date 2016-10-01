@@ -26,32 +26,41 @@ public class GrupoWs {
     @GET
     @Path("/getgrupos")
     @Produces("application/json")
-    public Response getGrupos() {
-        GrupoController grupoController;
-        grupoController = new GrupoController();
+    public Response getAllGrupos() {
+        // ArrayList<JSONObject> listaJson = new ArrayList<JSONObject>();
 
-        ArrayList<Grupo> lista
-                = grupoController.getGrupos();
-        JSONObject retorno = new JSONObject();
-        JSONObject jGrupo;
-        for (Grupo grupo : lista) {
-            try {
+        try {
+            GrupoController grupoControler;
+            grupoControler = new GrupoController();
+            ArrayList<Grupo> lista = grupoControler.getGrupos();
+
+            JSONObject jGrupo;
+            StringBuilder retorno = new StringBuilder();
+            retorno.append("[");
+            boolean controle = false;
+            for (Grupo grupo : lista) {
+                if (controle) {
+                    retorno.append(" , ");
+                }
+
                 jGrupo = new JSONObject();
                 jGrupo.put("idGrupo", grupo.getIdgrupo());
                 jGrupo.put("tipousuario", grupo.getTipousuario());
                 jGrupo.put("descricaogrupo", grupo.getDescricaogrupo());
-                retorno.put("grupo" + grupo.getIdgrupo(), jGrupo.toString());
-            } catch (JSONException ex) {
-                Logger.getLogger(UsuarioWs.class.getName()).log(Level.SEVERE, null, ex);
+                retorno.append(jGrupo.toString());
+                controle = true;
             }
 
+            retorno.append("]");
+            return Response.status(200).entity(retorno.toString()).build();
+        } catch (Exception ex) {
+            System.out.println("Erro:" + ex);
+            return Response.status(200).entity(
+                    "{erro : \"" + ex + "\"}").build();
+
         }
-        return Response.status(200).entity(retorno.toString()).build();
     }
 
-    
-    
-    
     
     @POST
     @Path("/setgrupo")
