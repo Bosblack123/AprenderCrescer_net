@@ -5,7 +5,9 @@
         <title>Lista Usuario</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="vendor/alert/sweetalert.css">
         <script type="text/javascript" src="vendor/js/angular.min.js"></script>
+        <script type="text/javaScript" src="vendor/alert/sweetalert.min.js"></script>
         <script type="text/javaScript" src="js/myApp.js"></script>
         <script type="text/javaScript" src="js/controller/UsuarioController.js"></script>
         <script type="text/javaScript" src="js/factory/UsuarioFactory.js"></script>
@@ -17,7 +19,7 @@
         <div ng-show="editando">
             <h1> Editando </h1>
         </div>
-        <form ng-submit="CadastroUsuario(usuario)">
+        <form ng-submit="cadastroUsuario(usuario)">
             <div>
                 <label>Nome:</label>
                 <input ng-model="usuario.nome" Type="text" placeholder="Digite seu Nome">

@@ -82,10 +82,6 @@ public class UsuarioWs {
         }
     }
 
-    
-    
-    
-    
     @POST
     @Path("/setusuario")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -113,14 +109,15 @@ public class UsuarioWs {
             usuario.setFlagnativo(resposta.getString("flagnativo").toCharArray()[0]);
             usuario.setDtalteracao(new Date());
 
-            new UsuarioController().insereUsuario(usuario);
+            if (new UsuarioController().insereUsuario(usuario)) {
+                    return Response.status(200).entity("{\"result\"" + ":\"Cadastro\"}").build();
+            } else {
+                return Response.status(501).entity("{\"result\"" + ":\"Erro no Cadastro\"}").build();
+            }
 
-            Response.status(200).entity(
-                    requisicaoFinal.toString()).build();
         } catch (Exception ex) {
             return Response.status(501).entity(ex.toString()).build();
         }
 
-        return null;
     }
 }

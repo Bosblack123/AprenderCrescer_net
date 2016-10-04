@@ -12,16 +12,12 @@ public class Conexao {
 
     private static Connection conexao;
 
-    public static Connection getConexao() {
+    public static Connection getConexao() throws SQLException{
         if (conexao == null) {
-           try{
             conexao = DriverManager.getConnection(
                     "jdbc:postgresql://127.0.0.1:5432/web", 
                     "postgres", 
                     "postgres");
-           }catch(SQLException ex){
-               System.out.println("Erro Conexo Banco"+ex);
-           }
         }
         return conexao;
     }

@@ -65,7 +65,7 @@ public class UsuarioDao {
                     + "' , '" + usuario.getSenha()
                     + "' , '" + usuario.getNome()
                     + "' , '" + data.toString()
-                    + "', 'F' )";
+                    + "', 'F')";
             System.out.println(sql);
             st.execute(sql);
             return true;

@@ -8,7 +8,7 @@ myApp.factory('UsuarioFactory', ['$http', function ($http) {
                             callback(resposta);
                         });
             },
-            setUsuario: function (callback) {
+            setUsuario: function (callback, usuario) {
                 $http({"method": "POST", "url": "/AprenderCrescer/rest/usuario/setusuario",
                     "headers": {"Content-Type": "application/json"},
                     "data": usuario
