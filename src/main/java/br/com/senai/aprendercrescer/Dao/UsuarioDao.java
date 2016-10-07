@@ -82,10 +82,10 @@ public class UsuarioDao {
                 + "idusuario=" + usuario.getIdusuario() + ", "
                 + "login='" + usuario.getLogin() + "',"
                 + "senha='" + usuario.getSenha() + "', "
-                + "nome='" + usuario.getNome() + "',"
+                + "nome='" + usuario.getNome() + "', "
                 + "dtalteracao='" + data + "', "
-                + "flagnativo='N' "
-                + "WHERE idusuario= " + usuario.getIdusuario() + ";";
+                + "flagnativo='"+ usuario.getFlagnativo()+"'"
+                + "WHERE idusuario=" + usuario.getIdusuario() + ";";
         try {
             st.executeUpdate(sql);
             return true;
@@ -109,6 +109,7 @@ public class UsuarioDao {
                 usuario.setLogin(rs.getString("LOGIN"));
                 usuario.setNome(rs.getString("NOME"));
                 usuario.setSenha(rs.getString("SENHA"));
+                usuario.setFlagnativo(rs.getString("FLAGNATIVO").toCharArray()[0]);
                 lista.add(usuario);
             }
         } catch (SQLException ex) {

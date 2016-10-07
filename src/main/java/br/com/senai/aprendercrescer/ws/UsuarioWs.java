@@ -10,9 +10,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -110,7 +112,7 @@ public class UsuarioWs {
             usuario.setDtalteracao(new Date());
 
             if (new UsuarioController().insereUsuario(usuario)) {
-                    return Response.status(200).entity("{\"result\"" + ":\"Cadastro\"}").build();
+                return Response.status(200).entity("{\"result\"" + ":\"Cadastro\"}").build();
             } else {
                 return Response.status(501).entity("{\"result\"" + ":\"Erro no Cadastro\"}").build();
             }
@@ -119,5 +121,59 @@ public class UsuarioWs {
             return Response.status(501).entity(ex.toString()).build();
         }
 
+    }
+
+    @POST
+    @Path("/updateusuario")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUsuario(InputStream dadosServ) {
+
+        StringBuilder requisicaoFinal = new StringBuilder();
+
+        try {
+            BufferedReader in
+                    = new BufferedReader(new InputStreamReader(dadosServ));
+
+            String requisicao = "";
+            while ((requisicao = in.readLine()) != null) {
+                requisicaoFinal.append(requisicao);
+
+            }
+            System.out.println(requisicaoFinal.toString());
+
+            JSONObject resposta = new JSONObject(requisicaoFinal.toString());
+            Usuario usuario = new Usuario();
+            usuario.setIdusuario(resposta.getInt("idUsuario"));
+            usuario.setLogin(resposta.getString("login"));
+            usuario.setSenha(resposta.getString("senha"));
+            usuario.setNome(resposta.getString("nome"));
+            usuario.setFlagnativo(resposta.getString("flagnativo").toCharArray()[0]);
+            usuario.setDtalteracao(new Date());
+
+            if (new UsuarioController().insereUsuario(usuario)) {
+                return Response.status(200).entity("{\"result\"" + ":\"Cadastro\"}").build();
+            } else {
+                return Response.status(501).entity("{\"result\"" + ":\"Erro no Cadastro\"}").build();
+            }
+
+        } catch (Exception ex) {
+            return Response.status(501).entity(ex.toString()).build();
+        }
+
+    }
+
+    @DELETE
+    @Path(("/deleteusuario/(idusuario)"))
+    public Response deleteUsuario(@PathParam("idusuario") int idUsuario) {
+        try {
+            if (new UsuarioController().deleteUsuario(idUsuario)) {
+                Response.status(200).build();
+            } else {
+                Response.status(400).build();
+            }
+        } catch (Exception ex) {
+            Response.status(400).entity(ex.toString()).build();
+        }
+        return Response.status(200).build();
     }
 }
