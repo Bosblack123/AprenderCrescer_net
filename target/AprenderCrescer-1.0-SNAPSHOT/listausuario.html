@@ -6,67 +6,79 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="vendor/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css">
+        <script type="text/javaScript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/js/angular.min.js"></script>
         <script type="text/javaScript" src="vendor/alert/sweetalert.min.js"></script>
         <script type="text/javaScript" src="js/myApp.js"></script>
         <script type="text/javaScript" src="js/controller/UsuarioController.js"></script>
         <script type="text/javaScript" src="js/factory/UsuarioFactory.js"></script>
+
     </head>
     <body ng-controller="UsuarioController" ng-init="buscaUsuario()">
-        <div ng-hide="editando">
-            <h1> Cadastro </h1>
-        </div>
-        <div ng-show="editando">
-            <h1> Editando </h1>
-        </div>
-        <form ng-submit="cadastroUsuario(usuario)">
-            <div>
-                <label>Nome:</label>
-                <input ng-model="usuario.nome" Type="text" placeholder="Digite seu Nome">
+        <div class="container">
+            <div class="row">
+                <div ng-hide="editando" class="col-lg-12">
+                    <h1> Cadastro </h1>
+                </div>
+                <div ng-show="editando">
+                    <h1> Editando </h1>
+                </div>
             </div>
-            <div>
-                <label>Login:</label>
-                <input ng-model="usuario.login" Type="text" placeholder="Digite seu Login">
+            <div class="row">
+                <div class="col-lg-3">
+                    <form ng-submit="cadastroUsuario(usuario)">
+                        <div>
+                            <label class="control-label">Nome:</label>
+                            <input class="form-control" ng-model="usuario.nome" Type="text" placeholder="Digite seu Nome">
+                        </div>
+                        <div>
+                            <label class="control-label">Login:</label>
+                            <input class="form-control" ng-model="usuario.login" Type="text" placeholder="Digite seu Login">
+                        </div>
+                        <div>
+                            <label class="control-label">Senha:</label>
+                            <input class="form-control" ng-model="usuario.senha" Type="password" placeholder="Digite sua Senha">
+                        </div>
+                        <div>
+                            <label class="control-label">Ativo:</label>
+                            <input class="form-control" ng-model="usuario.flagnativo" Type="text" placeholder="Voce e ativo?">
+                        </div>
+                        <button class="btn" ng-show="editando" type="submit">Salvar</button>
+                        <button class="btn" ng-hide="editando" type="submit">Adicionar</button>
+                    </form>
+                </div>
+                <div class="col-lg-9">
+                    <div>
+                        <h1>Lista Usuario</h1>
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>IdUsuario</th>
+                                    <th>Login</th>
+                                    <th>Nome</th>
+                                    <th>Ativo</th>
+                                    <th>Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in dados">
+                                    <td>{{item.idUsuario}}</td>
+                                    <td>{{item.login}}</td>
+                                    <td>{{item.nome}}</td>
+                                    <td>{{item.flagnativo}}</td>
+                                    <td>
+                                        <button class="btn" ng-click="editarusuario(item)">Editar</button>
+                                        <button class="btn" ng-click="deleteUsuario(item)">Remover</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>Senha:</label>
-                <input ng-model="usuario.senha" Type="password" placeholder="Digite sua Senha">
-            </div>
-            <div>
-                <label>Ativo:</label>
-                <input ng-model="usuario.flagnativo" Type="text" placeholder="Voce e ativo?">
-            </div>
-            <button ng-show="editando" type="submit">Salvar</button>
-            <button ng-hide="editando" type="submit">Adicionar</button>
-        </form>
-        
-        <div>
-            <h1>Lista Usuario</h1>
-        </div>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>IdUsuario</th>
-                        <th>Login</th>
-                        <th>Nome</th>
-                        <th>Ativo</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in dados">
-                        <td>{{item.idUsuario}}</td>
-                        <td>{{item.login}}</td>
-                        <td>{{item.nome}}</td>
-                        <td>{{item.flagnativo}}</td>
-                        <td>
-                            <button ng-click="editarusuario(item)">Editar</button>
-                            <button ng-click="deleteUsuario">Remover</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </body>
 </html>

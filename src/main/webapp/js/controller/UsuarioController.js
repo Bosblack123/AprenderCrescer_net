@@ -22,16 +22,19 @@ myApp.controller('UsuarioController', function UsuarioController($scope, $http, 
     }
     $scope.callbackCadastroUsuario = function (resposta) {
         if (resposta.status != 200) {
-            swal("Usuario", "Erro ao cadastrar", "error");
-        }
-        if ($scope.editando == true) {
-            swal("Usuario", "Usuario editado com sucesso", "success");
-        } else if ($scope.editando == false) {
-            swal("Usuario", "Erro ao editar", "error");
+            if ($scope.editando != true) {
+                swal("Usuario", "Erro ao editar", "error");
+            } else {
+                swal("Usuario", "Erro ao cadastrar", "error");
+            }
         } else {
-            swal("Usuario", "Usuario cadastrado com sucesso", "success");
-            $scope.buscaUsuario();
-            $scope.limpaCampos();
+            if ($scope.editando != false) {
+                swal("Usuario", "Usuario editado com sucesso", "success");
+            } else {
+                swal("Usuario", "Usuario cadastrado com sucesso", "success");
+                $scope.limpaCampos();
+                $scope.buscaUsuario();
+            }
         }
     }
     $scope.limpaCampos = function () {
@@ -42,14 +45,16 @@ myApp.controller('UsuarioController', function UsuarioController($scope, $http, 
         $scope.usuario.flagnativo = "";
         $scope.editando = false;
     }
-    $scope.deleteUsuario = function (id) {
-        UsuarioFactory.deleteUsuario($scope.callbackDeleteUsuario, id)
+    $scope.deleteUsuario = function (usuario) {
+        UsuarioFactory.deleteUsuario($scope.callbackDeleteUsuario, usuario)
     };
     $scope.callbackDeleteUsuario = function (resposta) {
         if (resposta.status != 200) {
-            swal("Usuario", "Usuario deletado com sucesso", "success");
-        } else {
             swal("Usuario", "Erro ao deletar usuario", "error");
+        } else {
+            swal("Usuario", "Usuario deletado com sucesso", "success");
+            $scope.buscaUsuario();
+            $scope.limpaCampos();
         }
     }
-})
+});
