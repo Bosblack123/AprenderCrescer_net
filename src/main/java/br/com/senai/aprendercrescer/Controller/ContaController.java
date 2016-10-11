@@ -17,19 +17,17 @@ public class ContaController {
     }
 
     public boolean insereConta(Conta conta) {
-
-        if (conta.getIdconta() != 0) {
-            return contaDao.updateConta(conta);
-        } else {
-            return contaDao.insereConta(conta);
-        }
+        contaDao.gravar(conta);
+        return true;
     }
 
     public ArrayList<Conta> getContas() {
-        return contaDao.getContas();
+        return contaDao.getall();
     }
 
     public boolean deleteConta(int id) {
-        return contaDao.deleteConta(id);
+        Conta ct = new Conta(id);
+        contaDao.apagar(ct);
+        return true;
     }
 }

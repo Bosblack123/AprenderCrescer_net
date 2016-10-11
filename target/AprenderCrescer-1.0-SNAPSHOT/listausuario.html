@@ -44,8 +44,9 @@
                             <label class="control-label">Ativo:</label>
                             <input class="form-control" ng-model="usuario.flagnativo" Type="text" placeholder="Voce e ativo?">
                         </div>
-                        <button class="btn" ng-show="editando" type="submit">Salvar</button>
-                        <button class="btn" ng-hide="editando" type="submit">Adicionar</button>
+                        <button class="btn btn-primary" ng-show="editando" type="submit">Salvar</button>
+                        <button class="btn btn-primary" ng-hide="editando" type="submit">
+                            Adicionar</button>
                     </form>
                 </div>
                 <div class="col-lg-9">
@@ -53,7 +54,7 @@
                         <h1>Lista Usuario</h1>
                     </div>
                     <div>
-                        <table>
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>IdUsuario</th>
@@ -70,8 +71,12 @@
                                     <td>{{item.nome}}</td>
                                     <td>{{item.flagnativo}}</td>
                                     <td>
-                                        <button class="btn" ng-click="editarusuario(item)">Editar</button>
-                                        <button class="btn" ng-click="deleteUsuario(item)">Remover</button>
+                                        <button class="btn btn-success" ng-click="editarusuario(item)">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-danger" ng-click="deleteUsuario(item)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

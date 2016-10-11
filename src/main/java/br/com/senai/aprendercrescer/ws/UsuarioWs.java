@@ -1,7 +1,7 @@
 package br.com.senai.aprendercrescer.ws;
 
 import br.com.senai.aprendercrescer.Controller.UsuarioController;
-import br.com.senai.aprendercrescer.model.Usuario;
+import br.com.senai.aprendercrescer.model.Web;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +14,6 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,23 +26,6 @@ import org.json.JSONObject;
  */
 @Path("/usuario")
 public class UsuarioWs {
-
-    @GET
-    @Path("/getusuario")
-    @Produces("application/json")
-    public Response getUsuario() {
-        try {
-            JSONObject retorno = new JSONObject();
-            retorno.put("nome", "Daniel");
-            retorno.put("idade", 19);
-            return Response.status(200).entity(retorno.toString()).build();
-        } catch (JSONException ex) {
-            Logger.getLogger(UsuarioWs.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return Response.status(500).build();
-    }
-
     @GET
     @Path("/getusuarios")
     @Produces("application/json")
@@ -53,19 +35,19 @@ public class UsuarioWs {
         try {
             UsuarioController ususarioControler;
             ususarioControler = new UsuarioController();
-            ArrayList<Usuario> lista = ususarioControler.getUsuarios();
+            ArrayList<Web> lista = ususarioControler.getUsuarios();
 
             JSONObject jUsuario;
             StringBuilder retorno = new StringBuilder();
             retorno.append("[");
             boolean controle = false;
-            for (Usuario usuario : lista) {
+            for (Web usuario : lista) {
                 if (controle) {
                     retorno.append(" , ");
                 }
 
                 jUsuario = new JSONObject();
-                jUsuario.put("idUsuario", usuario.getIdusuario());
+                jUsuario.put("idUsuario", usuario.getIdUsuario());
                 jUsuario.put("login", usuario.getLogin());
                 jUsuario.put("senha", usuario.getSenha());
                 jUsuario.put("nome", usuario.getNome());
@@ -103,7 +85,7 @@ public class UsuarioWs {
             System.out.println(requisicaoFinal.toString());
 
             JSONObject resposta = new JSONObject(requisicaoFinal.toString());
-            Usuario usuario = new Usuario();
+            Web usuario = new Web();
             //usuario.setIdusuario(resposta.getInt("IDUsuario"));
             usuario.setLogin(resposta.getString("login"));
             usuario.setSenha(resposta.getInt("senha") + "");
@@ -142,8 +124,8 @@ public class UsuarioWs {
             System.out.println(requisicaoFinal.toString());
 
             JSONObject resposta = new JSONObject(requisicaoFinal.toString());
-            Usuario usuario = new Usuario();
-            usuario.setIdusuario(resposta.getInt("idUsuario"));
+            Web usuario = new Web();
+            usuario.setIdUsuario(resposta.getInt("idUsuario"));
             usuario.setLogin(resposta.getString("login"));
             usuario.setSenha(resposta.getString("senha"));
             usuario.setNome(resposta.getString("nome"));

@@ -2,7 +2,7 @@ package br.com.senai.aprendercrescer.Controller;
 
 import br.com.senai.aprendercrescer.Dao.UsuarioDao;
 import java.util.ArrayList;
-import br.com.senai.aprendercrescer.model.Usuario;
+import br.com.senai.aprendercrescer.model.Web;
 
 /**
  *
@@ -18,21 +18,18 @@ public class UsuarioController {
         }
     }
 
-    public boolean insereUsuario(Usuario usuario) {
-
-        if (usuario.getIdusuario() != 0) {
-            return usuarioDao.updateUsuario(usuario);
-        } else {
-            return usuarioDao.insereUsuario(usuario);
-        }
+    public boolean insereUsuario(Web usuario) {
+        usuarioDao.gravar(usuario);
+        return true;
     }
 
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarioDao.getUsuarios();
+    public ArrayList<Web> getUsuarios() {
+        return usuarioDao.getall();
     }
 
     public boolean deleteUsuario(int id) {
-        return usuarioDao.deleteUsuario(id);
+        Web wb = new Web(id);
+        usuarioDao.apagar(wb);
+        return true;
     }
-
 }

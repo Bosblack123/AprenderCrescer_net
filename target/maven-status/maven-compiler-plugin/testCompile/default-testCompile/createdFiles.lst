@@ -1,0 +1,7 @@
+br\com\senai\aprendercrescer\model\Conta.class
+br\com\senai\aprendercrescer\model\Usuario.class
+br\com\senai\aprendercrescer\Dao\GrupoDao.class
+br\com\senai\aprendercrescer\Dao\ContaDao.class
+br\com\senai\aprendercrescer\Dao\UsuarioDao.class
+br\com\senai\aprendercrescer\model\Grupo.class
+br\com\senai\aprendercrescer\Dao\Conexao.class
